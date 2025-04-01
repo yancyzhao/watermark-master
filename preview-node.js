@@ -1,9 +1,12 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 // 设置静态文件的根目录
-const staticPath = path.join(__dirname, '/');
+const staticPath = process.pkg !== undefined 
+    ? path.join(path.dirname(process.execPath), '/')  // EXE 运行时，使用 EXE 目录
+    : path.join(__dirname, '/');                     // Node.js 运行时，使用项目目录
 
 // 创建HTTP服务器
 http.createServer((req, res) => {
@@ -32,4 +35,11 @@ http.createServer((req, res) => {
     });
 }).listen(8080, () => {
     console.log('Server is running on http://localhost:8080');
+	
+    // 在 Windows 上使用默认浏览器打开
+    exec('start http://127.0.0.1:8080', (err) => {
+        if (err) {
+            console.error('Failed to open browser:', err);
+        }
+    });
 });
