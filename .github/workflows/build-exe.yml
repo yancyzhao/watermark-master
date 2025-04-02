@@ -21,12 +21,15 @@ jobs:
 
       - name: Install pkg
         run: npm install -g pkg
+        working-directory: ./  # 确保安装 pkg 时在根目录
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./  # 确保在项目根目录执行 npm install
 
       - name: Build EXE
         run: pkg preview-node.js --output watermark.exe --assets "index.html" --assets "static/**/*"
+        working-directory: ./  # 确保在根目录执行构建
 
       - name: Upload EXE to Release
         uses: softprops/action-gh-release@v1
