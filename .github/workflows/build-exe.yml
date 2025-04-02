@@ -4,7 +4,8 @@ on:
   push:
     tags:
       - "v*"  # 只有推送 tag (如 v1.0.0) 时才触发
-
+  workflow_dispatch:  # 允许手动触发
+  
 jobs:
   build:
     runs-on: windows-latest  # 运行环境：Windows
