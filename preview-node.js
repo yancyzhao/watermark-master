@@ -4,9 +4,7 @@ const path = require('path');
 const { exec } = require('child_process');
 
 // 设置静态文件的根目录
-const staticPath = process.pkg !== undefined 
-    ? path.join(path.dirname(process.execPath), '/')  // EXE 运行时，使用 EXE 目录
-    : path.join(__dirname, '/');                     // Node.js 运行时，使用项目目录
+const staticPath = path.join(__dirname, '/');
 
 // 创建HTTP服务器
 http.createServer((req, res) => {
